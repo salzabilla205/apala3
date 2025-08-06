@@ -4,7 +4,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "rimraf ./build && mkdirp ./build && babel -d ./build ./src"
   },
   "dependencies": {
     "express": "^4.18.2"
