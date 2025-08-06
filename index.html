@@ -1,0 +1,38 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monitoring Data</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Live Monitoring Data</h1>
+    <div id="dataDisplay">
+      <p><strong>Current:</strong> <span id="current">-</span> A</p>
+      <p><strong>Voltage:</strong> <span id="voltage">-</span> V</p>
+      <p><strong>Temperature:</strong> <span id="temp">-</span> °C</p>
+      <p><strong>Humidity:</strong> <span id="hum">-</span> %</p>
+    </div>
+  </div>
+  <script>
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/data");
+        const json = await res.json();
+        document.getElementById("current").textContent = json.current;
+        document.getElementById("voltage").textContent = json.voltage;
+        document.getElementById("temp").textContent = json.temp;
+        document.getElementById("hum").textContent = json.hum;
+      } catch (err) {
+        console.error("Gagal ambil data:", err);
+      }
+    }
+
+    setInterval(fetchData, 2000);
+    fetchData();
+  </script>
+</body>
+</html>
